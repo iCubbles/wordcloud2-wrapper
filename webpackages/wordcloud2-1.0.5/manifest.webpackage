@@ -1,0 +1,32 @@
+{
+  "name": "wordcloud2-1.0.5",
+  "groupId": "",
+  "version": "0.1.0-SNAPSHOT",
+  "modelVersion": "9.1.1",
+  "docType": "webpackage",
+  "author": {
+    "name": "Edwin Gamboa",
+    "email": "edwingamboa355@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": [],
+  "man": [],
+  "artifacts": {
+    "apps": [],
+    "elementaryComponents": [],
+    "compoundComponents": [],
+    "utilities": [
+      {
+        "artifactId": "wordcloud2",
+        "description": "Utility to make wordcloud2.js available within the Cubbles platform",
+        "resources": [
+          {
+            "dev": "wordcloud2.html",
+            "prod": "wordcloud2.min.html"
+          }
+        ],
+        "dependencies": []
+      }
+    ]
+  }
+}
