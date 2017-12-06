@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>&lt;wordcloud-default&gt; demo</title>
+
+    <script src="../../../cubx.core.rte@2.4.0/webcomponents-lite/webcomponents-lite.js"></script>
+
+    <!--
+        Refer to the crc-loader artifact from a Cubbles-Base.
+        Take care: All other dependencies are expected to be available within the same Base!
+
+        Want to add a 'main' -script to be executed after the dependencies have been loaded?
+        If yes, add the following attribute: data-crc-main="js/my-script.js"
+    -->
+    <script src="../../../cubx.core.rte@2.4.0/crc-loader/js/main.js" data-crcinit-loadcif="true"></script>
+
+</head>
+<body>
+<!--  Place cubbles components there. -->
+<wordcloud-default cubx-webpackage-id="this">
+    <cubx-core-init style="display: none">
+        <cubx-core-slot-init slot="list">[["Cubbles", 12], ["elementary", 8],["compound", 8], ["component", 8], ["rte", 6], ["utility", 6], ["webpackage", 6], ["webcomponent", 4], ["connections", 6], ["slots", 6],["artifacts", 6], ["manifest", 6],["store", 6], ["bde", 8],["dataflow", 4], ["polymer", 4], ["app", 4],["coder dev tools", 4], ["cdt", 4]]</cubx-core-slot-init>
+        <cubx-core-slot-init slot="useCanvas">false</cubx-core-slot-init>
+    </cubx-core-init>
+</wordcloud-default>
+
+</body>
+</html>

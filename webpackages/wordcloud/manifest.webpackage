@@ -1,0 +1,83 @@
+{
+  "name": "wordcloud",
+  "groupId": "",
+  "version": "0.1.0-SNAPSHOT",
+  "modelVersion": "9.1.1",
+  "docType": "webpackage",
+  "author": {
+    "name": "Edwin Gamboa",
+    "email": "edwingamboa355@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": [],
+  "man": [],
+  "artifacts": {
+    "apps": [
+      {
+        "artifactId": "docs",
+        "description": "Generated webpackage documentation.",
+        "runnables": [
+          {
+            "name": "docs",
+            "path": "/index.html",
+            "description": "Show the interface of this component."
+          }
+        ]
+      }
+    ],
+    "elementaryComponents": [
+      {
+        "artifactId": "wordcloud-default",
+        "description": "Elementary component to create a wordcloud using the wordcloud2js library",
+        "runnables": [
+          {
+            "name": "demo",
+            "path": "/demo/index.html",
+            "description": "Demo app..."
+          },
+          {
+            "name": "docs",
+            "path": "/docs/index.html",
+            "description": "Show the interface of this component."
+          }
+        ],
+        "resources": [
+          "wordcloud-default.html"
+        ],
+        "dependencies": [
+          {
+            "webpackageId": "cubx.core.rte@2.4.0",
+            "artifactId": "cubxpolymer"
+          },
+          {
+            "webpackageId": "wordcloud2-1.0.5@1.0.0",
+            "artifactId": "wordcloud2"
+          }
+        ],
+        "slots": [
+          {
+            "slotId": "list",
+            "description": "List of words to be displayed in the form of [word, size]",
+            "type": "array",
+            "direction": [
+              "input",
+              "output"
+            ]
+          },
+          {
+            "slotId": "useCanvas",
+            "description": "Boolean indicating wheter to use a canvas element for the wordcloud. If false a div element will be used",
+            "type": "boolean",
+            "direction": [
+              "input",
+              "output"
+            ],
+            "value": true
+          }
+        ]
+      }
+    ],
+    "compoundComponents": [],
+    "utilities": []
+  }
+}
