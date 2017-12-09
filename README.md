@@ -1,4 +1,6 @@
 ## wordcloud2-wrapper
 
-<hr/>
-Note This page is generated based on the markdown-syntax. For details see <http://daringfireball.net/projects/markdown/syntax/>
+This project contains the [wordcloud2-wrapper](https://github.com/iCubbles/wordcloud2-wrapper/tree/master/webpackages/wordcloud) webpackage, which contains the necessary Cubbles components for managing cookies in the browser.
+
+[Want to get to know the Cubbles Platform?](https://cubbles.github.io)
+

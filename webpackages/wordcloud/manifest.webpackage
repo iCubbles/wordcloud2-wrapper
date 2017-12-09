@@ -1,7 +1,7 @@
 {
   "name": "wordcloud",
   "groupId": "",
-  "version": "0.1.0-SNAPSHOT",
+  "version": "1.0.0",
   "modelVersion": "9.1.1",
   "docType": "webpackage",
   "author": {
@@ -84,7 +84,7 @@
           {
             "slotId": "dimensions",
             "description": "Object in the form {width: \"width\", height: \"height\"}, which corresponds to the dimensions to be set to the wordcloud container. One or both dimensions can be set. Dimenasions can be a css valid dimension. However, when using canvas only pixels are accepted",
-            "type": "Object",
+            "type": "object",
             "direction": [
               "input"
             ]
