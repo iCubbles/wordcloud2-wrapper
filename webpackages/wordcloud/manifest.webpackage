@@ -69,10 +69,25 @@
             "description": "Boolean indicating wheter to use a canvas element for the wordcloud. If false a div element will be used",
             "type": "boolean",
             "direction": [
-              "input",
-              "output"
+              "input"
             ],
             "value": true
+          },
+          {
+            "slotId": "options",
+            "description": "Object containing options to be used by the wordcloud library. See https://github.com/timdream/wordcloud2.js/blob/gh-pages/API.md#option",
+            "type": "object",
+            "direction": [
+              "input"
+            ]
+          },
+          {
+            "slotId": "dimensions",
+            "description": "Object in the form {width: \"width\", height: \"height\"}, which corresponds to the dimensions to be set to the wordcloud container. One or both dimensions can be set. Dimenasions can be a css valid dimension. However, when using canvas only pixels are accepted",
+            "type": "Object",
+            "direction": [
+              "input"
+            ]
           }
         ]
       }

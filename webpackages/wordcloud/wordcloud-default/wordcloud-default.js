@@ -46,7 +46,7 @@
      * Manipulate an element’s local DOM when the cubbles framework is initialized and ready to work.
      */
     cubxReady: function () {
-      this._options = this.DEFAULT_OPTIONS;
+      this._updateOptions(this.DEFAULT_OPTIONS);
       this._updateWordCloud();
     },
 
@@ -65,6 +65,86 @@
      */
     modelUseCanvasChanged: function (useCanvas) {
       this._updateWordCloud();
+    },
+
+    /**
+     *  Observe the Cubbles-Component-Model: If value for slot 'options' has changed ...
+     */
+    modelOptionsChanged: function (options) {
+      this._updateOptions(options);
+      this._updateWordCloud();
+    },
+
+    /**
+     *  Observe the Cubbles-Component-Model: If value for slot 'dimensions' has changed ...
+     */
+    modelDimensionsChanged: function (dimensions) {
+      if (this._isValidDimensionsObject(dimensions)) {
+        this._updateSize(dimensions);
+        this._updateWordCloud();
+      }
+    },
+
+    _updateSize: function (size) {
+      if(this.getUseCanvas()){
+        this._updateCanvasSize(size);
+      } else {
+        this._updateDivSize(size);
+      }
+    },
+
+    _updateCanvasSize: function (size) {
+      if (size.hasOwnProperty('width')) {
+        this._setDimensionToCanvas(size.width, 'width');
+      }
+      if (size.hasOwnProperty('height')) {
+        this._setDimensionToCanvas(size.height, 'height');
+      }
+    },
+
+    _setDimensionToCanvas: function (dimension, dimensionName) {
+      if (this._isValidCanvasDimension(dimension)) {
+        this._getCanvasElement().setAttribute(dimensionName, dimension);
+      } else {
+        this._logInvalidCanvasDimension(dimensionName, dimension);
+      }
+    },
+
+    _setDimensionToDiv: function (dimension, dimensionName) {
+      if (this._isValidCssDimension(dimension)) {
+        this._getDivElement().style[dimensionName] = dimension;
+      } else {
+        this._logInvalidCssDimension(dimensionName, dimension);
+      }
+    },
+
+    _logInvalidCssDimension: function (dimensionName, dimension) {
+      console.error(dimension + ' is an invalid ' + dimensionName + ' for the div.' +
+        'It should be a css valid dimension (e.g. "10em" or "10px")');
+    },
+
+    _logInvalidCanvasDimension: function (dimensionName, dimension) {
+      console.error(dimension + ' is an invalid ' + dimensionName + ' for the canvas.' +
+        'It should be a number or a pixels dimension (e.g. "10" or "10px")');
+    },
+
+    _updateDivSize: function (size) {
+      if (size.hasOwnProperty('width')) {
+        this._setDimensionToDiv(size.width, 'width');
+      }
+      if (size.hasOwnProperty('height')) {
+        this._setDimensionToDiv(size.height, 'height');
+      }
+    },
+
+    _updateOptions: function(newOptions) {
+      if (!this._options) {
+        this._options = newOptions;
+      } else {
+        Object.keys(newOptions).forEach(function (key) {
+          this._options[key] = newOptions[key];
+        }.bind(this))
+      }
     },
 
     _updateWordCloud: function () {
@@ -87,8 +167,10 @@
     },
 
     _displayProperWordcloudElement: function () {
-      var wordcloudCanvas = this.$$('#wordcloudCanvas');
-      var wordcloudDiv = this.$$('#wordcloudDiv');
+      var wordcloudCanvas = this._getCanvasElement();
+      var wordcloudDiv = this._getDivElement();
+      this._cleanElement(wordcloudCanvas);
+      this._cleanElement(wordcloudDiv);
       if (this.getUseCanvas()) {
         this._displayElement(wordcloudCanvas);
         this._hideElement(wordcloudDiv);
@@ -96,6 +178,10 @@
         this._displayElement(wordcloudDiv);
         this._hideElement(wordcloudCanvas);
       }
+    },
+
+    _cleanElement: function (element){
+      element.innerHTML = '';
     },
 
     _displayElement: function (element) {
@@ -108,10 +194,30 @@
 
     _getWordcloudElement: function () {
       if (this.getUseCanvas()) {
-        return this.$$('#wordcloudCanvas');
+        return this._getCanvasElement();
       } else {
-        return this.$$('#wordcloudDiv');
+        return this._getDivElement();
       }
+    },
+
+    _getCanvasElement: function () {
+      return this.$$('#wordcloudCanvas');
+    },
+
+    _getDivElement: function () {
+      return this.$$('#wordcloudDiv');
+    },
+
+    _isValidCanvasDimension: function (dimension) {
+      return /^\d+\.?\d+(px)?$/.test(dimension)
+    },
+
+    _isValidCssDimension: function (dimension) {
+      return /^(auto|0)$|^\d+\.?\d+(px|em|ex|%|in|cm|mm|pt|pc)$/.test(dimension)
+    },
+
+    _isValidDimensionsObject: function (dimensionsObject) {
+      return dimensionsObject.hasOwnProperty('width') || dimensionsObject.hasOwnProperty('height')
     }
   });
 }());
