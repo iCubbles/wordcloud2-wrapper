@@ -16,26 +16,13 @@
      * Manipulate an element’s local DOM when the element is created.
      */
     created: function () {
-    },
-
-    /**
-     * Manipulate an element’s local DOM when the element is created and initialized.
-     */
-    ready: function () {
-    },
-
-    /**
-     * Manipulate an element’s local DOM when the element is attached to the document.
-     */
-    attached: function () {
       this.DEFAULT_OPTIONS = {
-        gridSize: Math.round(10 * this._getWordcloudElement().clientWidth / 1024),
         weightFactor: function (size) {
           return Math.pow(size, 2.3) * this._getWordcloudElement().clientWidth / 1024;
         }.bind(this),
         fontFamily: 'Times, serif',
         color: function (word, weight) {
-          return (weight === 12) ? '#f02222' : '#c09292';
+          return (weight === 10) ? '#f02222' : '#c09292';
         },
         rotationSteps: 2,
         backgroundColor: '#ffe0e0'
@@ -43,12 +30,19 @@
     },
 
     /**
+     * Manipulate an element’s local DOM when the element is created and initialized.
+     */
+    ready: function () {},
+
+    /**
+     * Manipulate an element’s local DOM when the element is attached to the document.
+     */
+    attached: function () {},
+
+    /**
      * Manipulate an element’s local DOM when the cubbles framework is initialized and ready to work.
      */
-    cubxReady: function () {
-      this._updateOptions(this.DEFAULT_OPTIONS);
-      this._updateWordCloud();
-    },
+    cubxReady: function () {},
 
     /**
      *  Observe the Cubbles-Component-Model: If value for slot 'list' has changed ...
@@ -148,12 +142,13 @@
     },
 
     _updateWordCloud: function () {
-      if (this._options) {
-        this._setListIfNeeded();
-        if (this._options.list) {
-          this._displayProperWordcloudElement();
-          WordCloud(this._getWordcloudElement(), this._options);
-        }
+      if (!this._options) {
+        this._options = this.DEFAULT_OPTIONS;
+      }
+      this._setListIfNeeded();
+      if (this._options.list) {
+        this._displayProperWordcloudElement();
+        WordCloud(this._getWordcloudElement(), this._options);
       }
     },
 

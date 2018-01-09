@@ -21,7 +21,15 @@
 <!--  Place cubbles components there. -->
 <wordcloud-default cubx-webpackage-id="this">
     <cubx-core-init style="display: none">
-        <cubx-core-slot-init slot="list">[["Cubbles", 12], ["elementary", 8],["compound", 8], ["component", 8], ["rte", 6], ["utility", 6], ["webpackage", 6], ["webcomponent", 4], ["connections", 6], ["slots", 6],["artifacts", 6], ["manifest", 6],["store", 6], ["bde", 8],["dataflow", 4], ["polymer", 4], ["app", 4],["coder dev tools", 4], ["cdt", 4]]</cubx-core-slot-init>
+        <cubx-core-slot-init slot="options">
+            {
+            "backgroundColor": "#E6E6E6",
+            "fontFamily": "sans-serif",
+            "shuffle": false,
+            "rotateRatio": 0
+            }
+        </cubx-core-slot-init>
+        <cubx-core-slot-init slot="list">[["Cubbles", 10], ["elementary", 8],["compound", 8], ["component", 8], ["rte", 6], ["utility", 6], ["webpackage", 6], ["webcomponent", 4], ["connections", 6], ["slots", 6],["artifacts", 6], ["manifest", 6],["store", 6], ["bde", 8],["dataflow", 4], ["polymer", 4], ["app", 4],["coder-dev-tools", 4], ["cdt", 4]]</cubx-core-slot-init>
         <cubx-core-slot-init slot="useCanvas">false</cubx-core-slot-init>
     </cubx-core-init>
 </wordcloud-default>
