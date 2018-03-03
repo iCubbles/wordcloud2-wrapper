@@ -11,15 +11,13 @@
    */
   CubxPolymer({
     is: 'wordcloud-default',
+    _totalFontPoints: 0,
 
     /**
      * Manipulate an element’s local DOM when the element is created.
      */
     created: function () {
       this.DEFAULT_OPTIONS = {
-        weightFactor: function (size) {
-          return Math.pow(size, 2.3) * this._getWordcloudElement().clientWidth / 1024;
-        }.bind(this),
         fontFamily: 'Times, serif',
         color: function (word, weight) {
           return (weight === 10) ? '#f02222' : '#c09292';
@@ -147,8 +145,30 @@
       }
       this._setListIfNeeded();
       if (this._options.list) {
+        this._updateTotalFontUnits(this._options.list);
         this._displayProperWordcloudElement();
         WordCloud(this._getWordcloudElement(), this._options);
+      }
+    },
+
+    _updateTotalFontUnits: function (list) {
+      const fontPointToPixelProportion = 1.33;
+      var totalFontPoints = 0;
+      var wordsAreaSum = 0;
+      list.forEach(function (wordInfo) {
+        totalFontPoints += wordInfo[1];
+        wordsAreaSum += calculateWordArea(wordInfo[0], wordInfo[1]);
+      }.bind(this));
+      if (!this.getOptions() || !this.getOptions().weightFactor) {
+        this._options.weightFactor = function calculateAverageWeight (size) {
+          var averageScale = (this._getWordcloudElement().clientWidth/Math.sqrt(wordsAreaSum) +
+          this._getWordcloudElement().clientHeight/Math.sqrt(wordsAreaSum)) / 2;
+          return size * averageScale;
+        }.bind(this);
+      }
+
+      function calculateWordArea(word, size) {
+        return (word.length * Math.pow(size, 2)) * Math.pow(fontPointToPixelProportion, 2)
       }
     },
 
